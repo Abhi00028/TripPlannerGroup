@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, Text, Button, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Button, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useTripStore from '../store/useTripStore';
-import { MaterialIcons } from '@expo/vector-icons'; // ✅ Import delete icon
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const { trips, removeTrip } = useTripStore(); // ✅ Access removeTrip function
-// Sort trips by date in ascending order (earliest first)
-const sortedTrips = trips.sort((a, b) => new Date(a.date) - new Date(b.date));
+  const { trips, removeTrip } = useTripStore(); 
+
+  // Sort trips by date (earliest first) without mutating state
+  const sortedTrips = [...trips].sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Trip Planner</Text>
@@ -19,6 +21,12 @@ const sortedTrips = trips.sort((a, b) => new Date(a.date) - new Date(b.date));
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.tripContainer}>
+            {/* ✅ Display Image */}
+            <Image 
+              source={item.image || require('../../assets/default_city.jpg')}  // ✅ Use local assets
+              style={styles.cityImage} 
+            />
+
             <TouchableOpacity
               style={styles.tripItem}
               onPress={() => navigation.navigate('TripSummary', { tripId: item.id })}
@@ -43,30 +51,45 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#fff', // ✅ Light background
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign: 'center',
   },
   tripContainer: {
-    flexDirection: 'row', // ✅ Arrange items in a row (Trip Info + Delete Button)
+    flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 15,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#f8f8f8',
     borderRadius: 8,
     padding: 10,
+    elevation: 3, // ✅ Adds shadow on Android
+    shadowColor: '#000', // ✅ Shadow for iOS
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  cityImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 8,
+    marginRight: 10,
   },
   tripItem: {
-    flex: 1, // ✅ Takes up all available space
+    flex: 1,
   },
   destination: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#333',
   },
   date: {
     fontSize: 16,
     marginVertical: 5,
+    color: '#666',
   },
   details: {
     fontSize: 14,
