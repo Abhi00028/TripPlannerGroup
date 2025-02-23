@@ -30,6 +30,7 @@ const TripSummaryScreen = () => {
 
   return (
     <View style={styles.container}>
+      
       <Text style={styles.header}>Trip Summary</Text>
       <Text style={styles.label}>Destination:</Text>
       <Text style={styles.value}>{trip.destination}</Text>
