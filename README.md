@@ -76,9 +76,57 @@ App Navigation:
   o	Add additional comments about the trip.
   o	Save your comments and return to the Home screen.
 4.	Deleting a Trip:
+
   o	On the Home screen, click the trash icon next to a trip to delete it from the list.
 
+Use of Flexbox Layouts:
 
+  •	The app consistently uses Flexbox to create flexible layouts in all screens (e.g., centering elements, distributing space   between trip details, participants, etc.). The flex and flexDirection properties are used to manage the layout across different devices.
+  •	Example: In the HomeScreen, the tripContainer uses a row layout to display the image and text side by side.
+
+3. Components Used:
+
+   The app employs various React Native components to construct the user interface:
+  •	Text: Display text such as headings, labels, and content.
+  •	View: Used as a container for other components and layout.
+  •	TextInput: Used for user input (e.g., adding new trip details, entering participant names).
+  •	Button: Buttons used for actions like saving details, adding participants, and navigating between screens.
+  •	FlatList: Efficiently displays a list of items (e.g., trip list, participants list) with support for item rendering and          optimizing performance.
+  •	Image: Displays images, such as the default city image or custom images for trips.
+
+4. Event Handling:
+
+  •	onPress: Used for handling button presses, such as saving a trip, navigating between screens, or deleting a trip.
+  •   onChangeText: Used in TextInput components to capture user input (e.g., destination, date, participant names).
+  •	addTrip, removeTrip, addParticipant, removeParticipant: Functions in the Zustand store handle state changes (e.g., adding/removing trips and participants).
+
+5. State Management:
+
+  •	Zustand is used for global state management. The app stores trips, participants, and trip-related actions like adding/removing trips and participants in a centralized state (useTripStore).
+  •	When a trip is added, removed, or participants are updated, the app reflects these changes in real-time through Zustand state updates.
+
+6. Navigation:
+
+  •	The app uses react-navigation with a Stack Navigator for navigating between screens:
+  o	HomeScreen → TripDetailsScreen → ParticipantsScreen
+  o	TripSummaryScreen is accessed from the HomeScreen when a user selects a trip.
+  o	All screens are part of a stack, which allows for navigating forward and backward.
+
+7. Object-Oriented Programming (OOP):
+
+  •	State Store: Zustand's store management can be considered a simple application of the OOP principle of encapsulating state and behavior.
+  •	State Mutations: Methods for adding/removing trips and participants represent methods of an object (useTripStore store) that encapsulate related behavior.
+  •	Component Structure: Each screen is organized into a component, which follows the principle of separation of concerns and modularity.
+
+
+
+Developers 
+
+Abhishek Bhardwaj
+kavreet kaur
+Onyeka Ofojetu
+Vinyake rattan 
+Onolemon
 
 
 

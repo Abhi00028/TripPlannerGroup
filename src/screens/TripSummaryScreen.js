@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Button, StyleSheet } from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import useTripStore from '../store/useTripStore'; // Import Zustand store
-import { Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  Button,
+  StyleSheet,
+} from "react-native";
+import { useRoute } from "@react-navigation/native";
+import useTripStore from "../store/useTripStore"; // Import Zustand store
+import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const TripSummaryScreen = () => {
   const { tripId } = useRoute().params; // Get tripId from navigation
   const { trips } = useTripStore();
-  
+
   const [trip, setTrip] = useState(null);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const navigation = useNavigation();
 
   // Fetch the trip details when the component mounts or trips/tripId changes
@@ -21,7 +28,9 @@ const TripSummaryScreen = () => {
 
   // Function to handle saving the comment
   const handleSaveComment = () => {
-    Alert.alert("Success", "Comment saved!", [{ text: "OK", onPress: () => navigation.navigate('Home') }]);
+    Alert.alert("Success", "Comment saved!", [
+      { text: "OK", onPress: () => navigation.navigate("Home") },
+    ]);
   };
 
   // If trip is not found, display a message
@@ -37,7 +46,7 @@ const TripSummaryScreen = () => {
     <View style={styles.container}>
       {/* Header Text */}
       <Text style={styles.header}>Trip Summary</Text>
-      
+
       {/* Display trip destination */}
       <Text style={styles.label}>Destination:</Text>
       <Text style={styles.value}>{trip.destination}</Text>
@@ -56,7 +65,9 @@ const TripSummaryScreen = () => {
         <FlatList
           data={trip.participants}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <Text style={styles.participant}>{item}</Text>}
+          renderItem={({ item }) => (
+            <Text style={styles.participant}>{item}</Text>
+          )}
         />
       ) : (
         <Text style={styles.noData}>No participants added</Text>
@@ -85,12 +96,12 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   label: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 10,
   },
   value: {
@@ -99,16 +110,16 @@ const styles = StyleSheet.create({
   },
   participant: {
     fontSize: 16,
-    color: '#333',
+    color: "#333",
     paddingVertical: 4,
   },
   noData: {
     fontSize: 16,
-    color: 'gray',
+    color: "gray",
   },
   input: {
     height: 40,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 8,

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import useTripStore from '../store/useTripStore'; // Import Zustand store
+import React, { useState } from "react";
+import { View, Text, Button, TextInput, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import useTripStore from "../store/useTripStore"; // Import Zustand store
 
 const TripDetailsScreen = () => {
   const navigation = useNavigation();
   const { addTrip } = useTripStore();
 
   // State for new trip details
-  const [destination, setDestination] = useState('');
-  const [date, setDate] = useState('');
-  const [details, setDetails] = useState('');
+  const [destination, setDestination] = useState("");
+  const [date, setDate] = useState("");
+  const [details, setDetails] = useState("");
 
   // Function to handle saving the new trip
   const handleSave = () => {
@@ -37,14 +37,14 @@ const TripDetailsScreen = () => {
     addTrip(newTrip); // Add trip to Zustand store
 
     // Navigate to ParticipantsScreen with tripId
-    navigation.navigate('Participants', { tripId: newTrip.id });
+    navigation.navigate("Participants", { tripId: newTrip.id });
   };
 
   return (
     <View style={styles.container}>
       {/* Header Text */}
       <Text style={styles.header}>Add a New Trip</Text>
-      
+
       {/* Input field for destination */}
       <TextInput
         style={styles.input}
@@ -52,7 +52,7 @@ const TripDetailsScreen = () => {
         value={destination}
         onChangeText={setDestination}
       />
-      
+
       {/* Simple Date Input */}
       <TextInput
         style={styles.input}
@@ -68,7 +68,7 @@ const TripDetailsScreen = () => {
         value={details}
         onChangeText={setDetails}
       />
-      
+
       {/* Button to save the trip and navigate to Participants screen */}
       <Button title="Save & Manage Participants" onPress={handleSave} />
     </View>
@@ -83,12 +83,12 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   input: {
     height: 40,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 8,
