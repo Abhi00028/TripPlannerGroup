@@ -12,6 +12,7 @@ const TripDetailsScreen = () => {
   const [date, setDate] = useState('');
   const [details, setDetails] = useState('');
 
+  // Function to handle saving the new trip
   const handleSave = () => {
     if (!destination || !date || !details) {
       alert("All fields are required");
@@ -41,7 +42,10 @@ const TripDetailsScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* Header Text */}
       <Text style={styles.header}>Add a New Trip</Text>
+      
+      {/* Input field for destination */}
       <TextInput
         style={styles.input}
         placeholder="Destination"
@@ -57,6 +61,7 @@ const TripDetailsScreen = () => {
         onChangeText={setDate}
       />
 
+      {/* Input field for trip details */}
       <TextInput
         style={styles.input}
         placeholder="Details"
@@ -64,11 +69,13 @@ const TripDetailsScreen = () => {
         onChangeText={setDetails}
       />
       
+      {/* Button to save the trip and navigate to Participants screen */}
       <Button title="Save & Manage Participants" onPress={handleSave} />
     </View>
   );
 };
 
+// Styles for the TripDetailsScreen components
 const styles = StyleSheet.create({
   container: {
     flex: 1,

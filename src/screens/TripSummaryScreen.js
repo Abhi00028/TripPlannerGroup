@@ -5,7 +5,6 @@ import useTripStore from '../store/useTripStore'; // Import Zustand store
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-
 const TripSummaryScreen = () => {
   const { tripId } = useRoute().params; // Get tripId from navigation
   const { trips } = useTripStore();
@@ -13,13 +12,19 @@ const TripSummaryScreen = () => {
   const [trip, setTrip] = useState(null);
   const [comment, setComment] = useState('');
   const navigation = useNavigation();
+
+  // Fetch the trip details when the component mounts or trips/tripId changes
   useEffect(() => {
     const foundTrip = trips.find((t) => t.id === tripId);
     setTrip(foundTrip);
   }, [trips, tripId]);
+
+  // Function to handle saving the comment
   const handleSaveComment = () => {
     Alert.alert("Success", "Comment saved!", [{ text: "OK", onPress: () => navigation.navigate('Home') }]);
   };
+
+  // If trip is not found, display a message
   if (!trip) {
     return (
       <View style={styles.container}>
@@ -30,17 +35,22 @@ const TripSummaryScreen = () => {
 
   return (
     <View style={styles.container}>
-      
+      {/* Header Text */}
       <Text style={styles.header}>Trip Summary</Text>
+      
+      {/* Display trip destination */}
       <Text style={styles.label}>Destination:</Text>
       <Text style={styles.value}>{trip.destination}</Text>
 
+      {/* Display trip date */}
       <Text style={styles.label}>Date:</Text>
       <Text style={styles.value}>{trip.date}</Text>
 
+      {/* Display trip details */}
       <Text style={styles.label}>Details:</Text>
       <Text style={styles.value}>{trip.details}</Text>
 
+      {/* Display list of participants */}
       <Text style={styles.label}>Participants:</Text>
       {trip.participants.length > 0 ? (
         <FlatList
@@ -52,6 +62,7 @@ const TripSummaryScreen = () => {
         <Text style={styles.noData}>No participants added</Text>
       )}
 
+      {/* Input field for additional comments */}
       <Text style={styles.label}>Additional Comments:</Text>
       <TextInput
         style={styles.input}
@@ -60,11 +71,13 @@ const TripSummaryScreen = () => {
         onChangeText={setComment}
       />
 
-<Button title="Save Comment" onPress={handleSaveComment} />
+      {/* Button to save the comment */}
+      <Button title="Save Comment" onPress={handleSaveComment} />
     </View>
   );
 };
 
+// Styles for the TripSummaryScreen components
 const styles = StyleSheet.create({
   container: {
     flex: 1,

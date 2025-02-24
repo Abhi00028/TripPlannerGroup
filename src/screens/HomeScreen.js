@@ -13,20 +13,25 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* Header Text */}
       <Text style={styles.header}>Trip Planner</Text>
+      
+      {/* Button to navigate to TripDetails screen */}
       <Button title="Add New Trip" onPress={() => navigation.navigate('TripDetails')} />
 
+      {/* List of trips */}
       <FlatList 
         data={sortedTrips}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.tripContainer}>
-            {/* ✅ Display Image */}
+            {/* Display Image */}
             <Image 
-              source={item.image || require('../../assets/default_city.jpg')}  // ✅ Use local assets
+              source={item.image || require('../../assets/default_city.jpg')}  // Use local assets
               style={styles.cityImage} 
             />
 
+            {/* TouchableOpacity to navigate to TripSummary screen */}
             <TouchableOpacity
               style={styles.tripItem}
               onPress={() => navigation.navigate('TripSummary', { tripId: item.id })}
@@ -36,7 +41,7 @@ const HomeScreen = () => {
               <Text style={styles.details}>{item.details}</Text>
             </TouchableOpacity>
 
-            {/* ✅ Delete Button */}
+            {/* Delete Button */}
             <TouchableOpacity onPress={() => removeTrip(item.id)} style={styles.deleteButton}>
               <MaterialIcons name="delete" size={24} color="red" />
             </TouchableOpacity>
@@ -47,11 +52,12 @@ const HomeScreen = () => {
   );
 };
 
+// Styles for the HomeScreen components
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff', // ✅ Light background
+    backgroundColor: '#fff', // Light background
   },
   header: {
     fontSize: 24,
@@ -66,8 +72,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f8',
     borderRadius: 8,
     padding: 10,
-    elevation: 3, // ✅ Adds shadow on Android
-    shadowColor: '#000', // ✅ Shadow for iOS
+    elevation: 3, // Adds shadow on Android
+    shadowColor: '#000', // Shadow for iOS
     shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
