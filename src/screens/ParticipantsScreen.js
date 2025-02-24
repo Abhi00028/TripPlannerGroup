@@ -12,6 +12,7 @@ const ParticipantsScreen = () => {
   const [name, setName] = useState('');
   const [trip, setTrip] = useState(null);
 
+  // Fetch the trip details when the component mounts or trips/tripId changes
   useEffect(() => {
     if (tripId) {
       const foundTrip = trips.find((trip) => trip.id === tripId);
@@ -19,25 +20,30 @@ const ParticipantsScreen = () => {
     }
   }, [trips, tripId]);
 
+  // Function to add a new participant to the trip
   const addNewParticipant = () => {
     if (name.trim().length === 0 || !tripId) return;
     addParticipant(tripId, name);
     setName('');
   };
 
+  // Function to remove a participant from the trip
   const removeParticipantHandler = (participantName) => {
     if (!tripId) return;
     removeParticipant(tripId, participantName);
   };
 
+  // Function to navigate back to the Home screen
   const handleDone = () => {
-    navigation.navigate('Home'); // ✅ Navigate to HomeScreen
+    navigation.navigate('Home'); // Navigate to HomeScreen
   };
 
   return (
     <View style={styles.container}>
+      {/* Header Text */}
       <Text style={styles.header}>Manage Participants</Text>
 
+      {/* Input field for participant name */}
       <TextInput
         style={styles.input}
         placeholder="Enter participant name"
@@ -45,8 +51,10 @@ const ParticipantsScreen = () => {
         onChangeText={setName}
       />
 
+      {/* Button to add a new participant */}
       <Button title="Add Participant" onPress={addNewParticipant} />
 
+      {/* List of participants */}
       {trip && trip.participants?.length > 0 ? (
         <FlatList
           data={trip.participants}
@@ -62,12 +70,13 @@ const ParticipantsScreen = () => {
         <Text>No participants yet</Text>
       )}
 
-      {/* ✅ "Done" Button to navigate back */}
+      {/* "Done" Button to navigate back */}
       <Button title="Done" onPress={handleDone} color="green" />
     </View>
   );
 };
 
+// Styles for the ParticipantsScreen components
 const styles = StyleSheet.create({
   container: {
     flex: 1,
