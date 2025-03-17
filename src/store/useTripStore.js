@@ -9,24 +9,24 @@ const useTripStore = create((set) => ({
       destination: "Paris",
       date: "2025-03-01",
       details: "A romantic getaway to Paris",
-      participants: [],
-      image: require("../../assets/paris.jpg"),
+      participants: []
+      
     },
     {
       id: "2",
       destination: "Tokyo",
       date: "2025-05-10",
       details: "Exploring the vibrant city of Tokyo",
-      participants: [],
-      image: require("../../assets/tokyo_new.jpeg"),
+      participants: []
+      
     },
     {
       id: "3",
       destination: "New York",
       date: "2025-06-15",
       details: "Visiting iconic landmarks in New York",
-      participants: [],
-      image: require("../../assets/newyork.jpeg"),
+      participants: []
+     
     },
   ],
 

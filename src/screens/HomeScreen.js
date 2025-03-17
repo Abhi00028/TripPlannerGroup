@@ -12,6 +12,8 @@ import { useNavigation } from "@react-navigation/native";
 import useTripStore from "../store/useTripStore";
 import { MaterialIcons } from "@expo/vector-icons";
 
+
+
 const HomeScreen = () => {
   const navigation = useNavigation();
   const { trips, removeTrip } = useTripStore();
@@ -39,10 +41,14 @@ const HomeScreen = () => {
         renderItem={({ item }) => (
           <View style={styles.tripContainer}>
             {/* Display Image */}
-            <Image
-              source={item.image || require("../../assets/default_city.jpg")} // Use local assets
-              style={styles.cityImage}
-            />
+            {/* <Image
+  source={
+    item.image
+      ? { uri: item.image }
+      : require("../../assets/tokyo.jpg")
+  }
+  style={styles.cityImage}
+/> */}
 
             {/* TouchableOpacity to navigate to TripSummary screen */}
             <TouchableOpacity
